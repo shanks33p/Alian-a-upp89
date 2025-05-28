@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aliança UPP - Gamer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #000, #001f3f);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #00aaff;
+      text-shadow: 0 0 10px #00aaff;
+    }
+    .regras {
+      text-align: center;
+      font-size: 22px;
+      margin: 20px 0;
+    }
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding: 10px;
+      scroll-behavior: smooth;
+    }
+    .carousel img {
+      width: 250px;
+      height: 150px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 10px #00aaff;
+    }
+    .carousel img:hover {
+      transform: scale(1.1);
+    }
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin: 30px 0;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #001f3f;
+      border: 2px solid #00aaff;
+      border-radius: 8px;
+      padding: 12px 20px;
+      color: #00aaff;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s ease;
+      box-shadow: 0 0 10px #00aaff;
+    }
+    .btn:hover {
+      background: #00aaff;
+      color: #001f3f;
+      transform: scale(1.05);
+    }
+    .btn img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #001f3f;
+      border: 2px solid #00aaff;
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 0 10px #00aaff;
+    }
+    .locked {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #000;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .locked input {
+      padding: 10px;
+      border: 2px solid #00aaff;
+      background: #001f3f;
+      color: #fff;
+      border-radius: 5px;
+    }
+    .locked button {
+      padding: 10px 20px;
+      background: #00aaff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #001f3f;
+      box-shadow: 0 0 10px #00aaff;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Tela de senha -->
+<div class="locked" id="lockScreen">
+  <h2>Digite a senha para acessar</h2>
+  <input type="password" id="password" placeholder="Senha">
+  <button onclick="checkPassword()">Entrar</button>
+</div>
+
+<!-- Conteúdo principal -->
+<div id="mainContent" style="display:none;">
+  <header>Aliança UPP</header>
+  
+  <div class="regras">Regras da Aliança</div>
+  
+  <div class="carousel">
+    <img src="https://github.com/user-attachments/assets/02e7082e-16d7-47b4-9eb6-81b241cedbc8" alt="Regra 1">
+    <img src="https://github.com/user-attachments/assets/c5f178fd-e443-4280-81e1-98f955d6921b" alt="Regra 2">
+    <img src="https://github.com/user-attachments/assets/f24b8fae-a810-4db4-915a-7f405e8f3795" alt="Regra 3">
+    <img src="https://github.com/user-attachments/assets/2c7b72d3-1998-4e3a-b00a-3804502549c4" alt="Regra 4">
+    <img src="https://github.com/user-attachments/assets/8730625a-c3f5-463f-812d-5290defbb94d" alt="Regra 5">
+    <img src="https://github.com/user-attachments/assets/67c26434-f146-47ba-a5da-4d5e29ce0584" alt="Regra 6">
+    <img src="https://github.com/user-attachments/assets/9d8a49d8-c607-437e-a674-b185e85cceaa" alt="Regra 7">
+  </div>
+
+  <div class="buttons">
+    <a class="btn" href="https://docs.google.com/spreadsheets/d/1uFAKEURLEXEMPLO" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/00aaff/book.png" alt="Lista Negra"> Lista Negra
+    </a>
+    <a class="btn" href="mailto:pedroinacio69017@gmail.com?subject=Feedback%20Aliança%20UPP">
+      <img src="https://img.icons8.com/ios-filled/50/00aaff/feedback.png" alt="Feedback"> Enviar Feedback
+    </a>
+    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeUmgKNIYcTpfhvT0MtvFrOA3NwWl0OYnETF66209_gTSKwng/viewform" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/00aaff/edit-property.png" alt="Conselheiro"> Inscrição Conselheiro
+    </a>
+  </div>
+
+  <audio id="bgMusic" loop autoplay>
+    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <div class="music-control" onclick="toggleMusic()">
+    🎵
+  </div>
+</div>
+
+<script>
+  // JavaScript puro
+
+  // Função de verificação de senha
+  function checkPassword() {
+    const input = document.getElementById('password').value;
+    if(input === '2025') {
+      document.getElementById('lockScreen').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+    } else {
+      alert('Senha incorreta!');
+    }
+  }
+
+  // Controle de música
+  function toggleMusic() {
+    const music = document.getElementById('bgMusic');
+    if(music.paused) {
+      music.play();
+    } else {
+      music.pause();
+    }
+  }
+</script>
+
+</body>
+</html>
